@@ -268,7 +268,7 @@ def echo(update, context):
     elif update.message.text == txt_dict['delete_pages_text'][locale]:
         delete_cmd(update, context, locale)
     elif update.message.text == txt_dict['delete_text'][locale]:
-        output_path = tools.delete(context.user_data['list_of_files'],
+        output_path = tools.delete(context.user_data['file_path'],
                                    context.user_data['split_range'],
                                    output_folder)
         update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))

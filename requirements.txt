@@ -1,2 +1,4 @@
 PyPDF2
 pillow
+python-telegram-bot
+python-dotenv

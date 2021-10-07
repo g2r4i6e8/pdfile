@@ -1,0 +1,241 @@
+2021-10-07 21:14:43,742 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 21:15:01,962 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 73, in start
+    logger.info('User "%s" with language code "%s" started the bot instance', update.effective_user.user_id, update.effective_user.language_code)
+AttributeError: 'User' object has no attribute 'user_id'
+2021-10-07 21:15:23,849 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 73, in start
+    logger.info('User "%s" with language code "%s" started the bot instance', update.effective_user.user_id, update.effective_user.language_code)
+AttributeError: 'User' object has no attribute 'user_id'
+2021-10-07 21:15:52,739 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 339, in echo
+    idle(update, context, locale)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 94, in idle
+    logger.info('User "%s" with language code "%s" is idle', update.effective_user.user_id, update.effective_user.language_code)
+AttributeError: 'User' object has no attribute 'user_id'
+2021-10-07 21:16:49,910 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 21:16:49,911 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 21:19:46,205 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 21:20:31,759 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 21:20:31,759 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 21:22:34,970 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 21:22:37,308 - __main__ - WARNING - User "511002883" with language code "en" started the bot instance
+2021-10-07 21:23:04,373 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 21:23:04,373 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 21:45:37,371 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 21:45:51,595 - __main__ - INFO - User "511002883" with language code "en" started the bot instance
+2021-10-07 21:59:11,882 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 21:59:11,882 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 21:59:16,926 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 21:59:19,047 - __main__ - INFO - User "511002883" with language code "en" started the bot instance
+2021-10-07 21:59:19,211 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 52, in start
+    update.message.reply_text(txt_dict['start_msg'][locale],
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\message.py", line 764, in reply_text
+    return self.bot.send_message(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 513, in send_message
+    return self._message(  # type: ignore[return-value]
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\extbot.py", line 199, in _message
+    result = super()._message(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 332, in _message
+    result = self._post(endpoint, data, timeout=timeout, api_kwargs=api_kwargs)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 295, in _post
+    return self.request.post(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\utils\request.py", line 356, in post
+    result = self._request_wrapper(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\utils\request.py", line 279, in _request_wrapper
+    raise BadRequest(message)
+telegram.error.BadRequest: Can't parse entities: character '.' is reserved and must be escaped with the preceding '\'
+2021-10-07 22:00:41,789 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:00:41,789 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:00:56,456 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:00:59,670 - __main__ - INFO - User "511002883" with language code "en" started the bot instance
+2021-10-07 22:01:48,795 - __main__ - INFO - User "511002883" chose to compress PDF
+2021-10-07 22:02:25,004 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 229, in echo
+    output_path = tools.compress(context.user_data['list_of_files'],
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\tools.py", line 39, in compress
+    pdf_compressor.compress(file_path, output_path)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\pdf_compressor.py", line 50, in compress
+    subprocess.call(['gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 349, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "c:\users\kolom\miniconda3\lib\site-packages\spyder_kernels\customize\spydercustomize.py", line 108, in __init__
+    super(SubprocessPopen, self).__init__(*args, **kwargs)
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 951, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 1420, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+2021-10-07 22:02:59,533 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:02:59,534 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:03:47,555 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:03:56,130 - __main__ - INFO - User "511002883" is idle
+2021-10-07 22:03:56,270 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 304, in echo
+    idle(update, context, locale)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 73, in idle
+    update.message.reply_text(txt_dict['idle_msg'][locale],
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\message.py", line 764, in reply_text
+    return self.bot.send_message(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 513, in send_message
+    return self._message(  # type: ignore[return-value]
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\extbot.py", line 199, in _message
+    result = super()._message(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 332, in _message
+    result = self._post(endpoint, data, timeout=timeout, api_kwargs=api_kwargs)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 295, in _post
+    return self.request.post(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\utils\request.py", line 356, in post
+    result = self._request_wrapper(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\utils\request.py", line 279, in _request_wrapper
+    raise BadRequest(message)
+telegram.error.BadRequest: Can't parse entities: character '!' is reserved and must be escaped with the preceding '\'
+2021-10-07 22:04:43,167 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:04:43,167 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:04:47,510 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:04:50,635 - __main__ - INFO - User "511002883" is idle
+2021-10-07 22:04:52,161 - __main__ - INFO - User "511002883" chose to compress PDF
+2021-10-07 22:05:02,845 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 229, in echo
+    output_path = tools.compress(context.user_data['list_of_files'],
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\tools.py", line 40, in compress
+    pdf_compressor.compress(file_path, output_path)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\pdf_compressor.py", line 50, in compress
+    subprocess.call(['gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 349, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "c:\users\kolom\miniconda3\lib\site-packages\spyder_kernels\customize\spydercustomize.py", line 108, in __init__
+    super(SubprocessPopen, self).__init__(*args, **kwargs)
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 951, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 1420, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+2021-10-07 22:08:02,094 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:08:02,095 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:08:09,075 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:08:11,669 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 229, in echo
+    output_path = tools.compress(context.user_data['list_of_files'],
+KeyError: 'list_of_files'
+2021-10-07 22:08:14,212 - __main__ - INFO - User "511002883" is idle
+2021-10-07 22:08:15,232 - __main__ - INFO - User "511002883" chose to compress PDF
+2021-10-07 22:08:20,324 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 229, in echo
+    output_path = tools.compress(context.user_data['list_of_files'],
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\tools.py", line 39, in compress
+    pdf_compressor.compress(file_path, output_path)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\pdf_compressor.py", line 50, in compress
+    subprocess.call(['gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 349, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "c:\users\kolom\miniconda3\lib\site-packages\spyder_kernels\customize\spydercustomize.py", line 108, in __init__
+    super(SubprocessPopen, self).__init__(*args, **kwargs)
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 951, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 1420, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+2021-10-07 22:08:34,441 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:08:34,441 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:08:42,178 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:08:48,227 - __main__ - INFO - User "511002883" is idle
+2021-10-07 22:08:49,344 - __main__ - INFO - User "511002883" chose to compress PDF
+2021-10-07 22:09:00,586 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 229, in echo
+    output_path = tools.compress(context.user_data['list_of_files'],
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\tools.py", line 40, in compress
+    pdf_compressor.compress(file_path, output_path)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\pdf_compressor.py", line 50, in compress
+    subprocess.call(['gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 349, in call
+    with Popen(*popenargs, **kwargs) as p:
+  File "c:\users\kolom\miniconda3\lib\site-packages\spyder_kernels\customize\spydercustomize.py", line 108, in __init__
+    super(SubprocessPopen, self).__init__(*args, **kwargs)
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 951, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "c:\users\kolom\miniconda3\lib\subprocess.py", line 1420, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+FileNotFoundError: [WinError 2] The system cannot find the file specified
+2021-10-07 22:09:12,652 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:09:12,652 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:10:06,008 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:10:06,224 - __main__ - INFO - User "511002883" is idle
+2021-10-07 22:10:10,303 - __main__ - INFO - User "511002883" chose to merge PDF
+2021-10-07 22:10:27,633 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 241, in echo
+    os.remove(output_folder)
+PermissionError: [WinError 5] Access is denied: 'temp\\511002883'
+2021-10-07 22:11:41,331 - __main__ - INFO - User "511002883" is idle
+2021-10-07 22:11:43,939 - __main__ - INFO - User "511002883" chose to merge PDF
+2021-10-07 22:11:54,307 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 241, in echo
+    os.remove(output_folder)
+PermissionError: [WinError 5] Access is denied: 'temp\\511002883'
+2021-10-07 22:12:59,511 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:12:59,512 - apscheduler.scheduler - INFO - Scheduler has been shut down

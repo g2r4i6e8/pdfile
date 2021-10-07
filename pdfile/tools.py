@@ -2,6 +2,7 @@ import os
 from PyPDF2 import PdfFileMerger, PdfFileWriter, PdfFileReader
 from PIL import Image
 import pdf_compressor
+import libreoffice_converter
 from zipfile import ZipFile
 import re
 
@@ -114,10 +115,9 @@ def doc2pdf(list_of_files, output_folder):
         output_path = os.path.join(output_folder, 'documents_one-by-one.zip')
         zipObj = ZipFile(output_path, 'w')
         for file_path in list_of_files:
-            file_path = 'test/doc.dfsdf.doc'
             fname = os.path.join(os.path.basename(file_path))
             filename = '{}.pdf'.format(''.join(fname.split('.')[:-1]))
-            #abigail(file_path, os.path.join(output_folder, filename))
+            libreoffice_converter.convert('doc2pdf', file_path, output_folder)
             zipObj.write(os.path.join(output_folder, filename), filename)
             os.remove(os.path.join(output_folder, filename))
         zipObj.close()
@@ -127,5 +127,26 @@ def doc2pdf(list_of_files, output_folder):
         fname = os.path.join(os.path.basename(file_path))
         filename = '{}.pdf'.format(''.join(fname.split('.')[:-1]))
         output_path = os.path.join(output_folder, filename)
-        #abigail(file_path, output_path)
+        libreoffice_converter.convert('doc2pdf', file_path, output_folder)
+    return output_path
+
+# convert ppt(x) to pdf
+def ppt2pdf(list_of_files, output_folder):
+    if len(list_of_files) > 1:
+        output_path = os.path.join(output_folder, 'documents_one-by-one.zip')
+        zipObj = ZipFile(output_path, 'w')
+        for file_path in list_of_files:
+            fname = os.path.join(os.path.basename(file_path))
+            filename = '{}.pdf'.format(''.join(fname.split('.')[:-1]))
+            libreoffice_converter.convert('ppt2pdf', file_path, output_folder)
+            zipObj.write(os.path.join(output_folder, filename), filename)
+            os.remove(os.path.join(output_folder, filename))
+        zipObj.close()
+    
+    elif len(list_of_files) == 1:
+        file_path = list_of_files[0]
+        fname = os.path.join(os.path.basename(file_path))
+        filename = '{}.pdf'.format(''.join(fname.split('.')[:-1]))
+        output_path = os.path.join(output_folder, filename)
+        libreoffice_converter.convert('ppt2pdf', file_path, output_folder)
     return output_path

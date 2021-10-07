@@ -46,8 +46,7 @@ def compress(list_of_files, output_folder):
 def merge(list_of_files, output_folder):
     merger = PdfFileMerger()
     for file_path in list_of_files:
-        with open(file_path, 'rb') as input_file:
-            merger.append(input_file)
+        merger.append(PdfFileReader(file_path, 'rb'))
     output_path = os.path.join(output_folder, 'document_merged.pdf')
     with open(output_path, 'wb') as outputStream:
         merger.write(outputStream)

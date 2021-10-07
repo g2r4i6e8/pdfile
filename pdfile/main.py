@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 import re
 from datetime import datetime
 import json
-
+import shutil
 
 """
 Universal Telegram Bot for working with PDF files.
@@ -105,7 +105,8 @@ def merge_cmd(update, context, locale):
 def split_cmd(update, context, locale):
     logger.info('User "%s" chose to split PDF', update.effective_user.id)
     update.message.reply_text(txt_dict['split_input_text'][locale])
-    update.message.reply_text(txt_dict['available_range_text'][locale])
+    update.message.reply_text(txt_dict['available_range_text'][locale],
+                              parse_mode='MarkdownV2')
     
     context.user_data['file_path'] = ''
     context.user_data['function'] = 'split'
@@ -126,7 +127,8 @@ def split_cmd_2(update, context, locale):
 def delete_cmd(update, context, locale):
     logger.info('User "%s" chose to delete pages', update.effective_user.id)
     update.message.reply_text(txt_dict['delete_input_text'][locale])
-    update.message.reply_text(txt_dict['available_range_text'][locale])
+    update.message.reply_text(txt_dict['available_range_text'][locale],
+                              parse_mode='MarkdownV2')
     
     context.user_data['file_path'] = ''
     context.user_data['function'] = 'delete'
@@ -229,7 +231,7 @@ def echo(update, context):
         output_path = tools.compress(context.user_data['list_of_files'], 
                                      output_folder)
         update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        os.remove(output_folder)
+        shutil.rmtree(output_folder)
         del context.user_data['list_of_files']
         idle(update, context, locale)
     elif update.message.text == txt_dict['merge_pdf_text'][locale]:
@@ -238,7 +240,7 @@ def echo(update, context):
         output_path = tools.merge(context.user_data['list_of_files'], 
                                   output_folder)
         update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        os.remove(output_folder)
+        shutil.rmtree(output_folder)
         del context.user_data['list_of_files']
         idle(update, context, locale)
     elif update.message.text == txt_dict['split_pdf_text'][locale]:
@@ -249,7 +251,7 @@ def echo(update, context):
                                   output_folder,
                                   separate_pages = False)
         update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        os.remove(output_folder)
+        shutil.rmtree(output_folder)
         del context.user_data['file_path']
         del context.user_data['function']
         idle(update, context, locale)
@@ -259,7 +261,7 @@ def echo(update, context):
                                   output_folder,
                                   separate_pages = True)
         update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        os.remove(output_folder)
+        shutil.rmtree(output_folder)
         del context.user_data['file_path']
         del context.user_data['function']
         idle(update, context, locale)
@@ -270,7 +272,7 @@ def echo(update, context):
                                    context.user_data['split_range'],
                                    output_folder)
         update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        os.remove(output_folder)
+        shutil.rmtree(output_folder)
         del context.user_data['file_path']
         del context.user_data['function']
         idle(update, context, locale)
@@ -291,7 +293,7 @@ def echo(update, context):
             output_path = tools.ppt2pdf(context.user_data['list_of_files'],
                                        output_folder)
         update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        os.remove(output_folder)
+        shutil.rmtree(output_folder)
         del context.user_data['list_of_files']
         del context.user_data['function']
         idle(update, context, locale)

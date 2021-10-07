@@ -239,3 +239,73 @@ Traceback (most recent call last):
 PermissionError: [WinError 5] Access is denied: 'temp\\511002883'
 2021-10-07 22:12:59,511 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
 2021-10-07 22:12:59,512 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:52:23,094 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:52:29,688 - __main__ - INFO - User "511002883" chose to split PDF
+2021-10-07 22:52:47,472 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:52:47,472 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:53:59,378 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:54:03,437 - __main__ - INFO - User "511002883" chose to split PDF
+2021-10-07 22:54:03,737 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 247, in echo
+    split_cmd(update, context, locale)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 108, in split_cmd
+    update.message.reply_text(txt_dict['available_range_text'][locale],
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\message.py", line 764, in reply_text
+    return self.bot.send_message(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 513, in send_message
+    return self._message(  # type: ignore[return-value]
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\extbot.py", line 199, in _message
+    result = super()._message(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 332, in _message
+    result = self._post(endpoint, data, timeout=timeout, api_kwargs=api_kwargs)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 295, in _post
+    return self.request.post(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\utils\request.py", line 356, in post
+    result = self._request_wrapper(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\utils\request.py", line 279, in _request_wrapper
+    raise BadRequest(message)
+telegram.error.BadRequest: Can't parse entities: character '-' is reserved and must be escaped with the preceding '\'
+2021-10-07 22:54:46,922 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:54:46,922 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:54:54,384 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:55:01,532 - __main__ - INFO - User "511002883" chose to split PDF
+2021-10-07 22:55:01,895 - telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\dispatcher.py", line 555, in process_update
+    handler.handle_update(update, self, check, context)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\handler.py", line 198, in handle_update
+    return self.callback(update, context)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 247, in echo
+    split_cmd(update, context, locale)
+  File "C:\Users\kolom\OneDrive\Documents\Projects\pdfile\pdfile\main.py", line 108, in split_cmd
+    update.message.reply_text(txt_dict['available_range_text'][locale],
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\message.py", line 764, in reply_text
+    return self.bot.send_message(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 130, in decorator
+    result = func(*args, **kwargs)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 513, in send_message
+    return self._message(  # type: ignore[return-value]
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\ext\extbot.py", line 199, in _message
+    result = super()._message(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 332, in _message
+    result = self._post(endpoint, data, timeout=timeout, api_kwargs=api_kwargs)
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\bot.py", line 295, in _post
+    return self.request.post(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\utils\request.py", line 356, in post
+    result = self._request_wrapper(
+  File "c:\users\kolom\miniconda3\lib\site-packages\telegram\utils\request.py", line 279, in _request_wrapper
+    raise BadRequest(message)
+telegram.error.BadRequest: Can't parse entities: character '(' is reserved and must be escaped with the preceding '\'
+2021-10-07 22:55:18,790 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:55:18,790 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2021-10-07 22:55:32,061 - apscheduler.scheduler - INFO - Scheduler started
+2021-10-07 22:55:35,526 - __main__ - INFO - User "511002883" chose to split PDF
+2021-10-07 22:58:52,548 - telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+2021-10-07 22:58:52,549 - apscheduler.scheduler - INFO - Scheduler has been shut down

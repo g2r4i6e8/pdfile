@@ -1,3 +1,4 @@
 .idea
 *.env
 pdfile/__pychache__
+logs/

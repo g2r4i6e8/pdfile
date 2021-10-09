@@ -4,7 +4,7 @@
         "ru": "_Сделай свою жизнь проще вместе с PDFile\\!_\n\n*Сжать PDF*: Уменьшайте размер вашего PDF-файла без потери качества \\(до 100 файлов одновременно\\!\\)\n\n*Объединить PDF*: Объединяйте несколько PDF файлов в один документ\n\n*Разделить PDF*: Выбирайте диапазон страниц, одну страницу или преобразовывайте каждую страницу документа в отдельный PDF-файл\n\n*Удалить страницы*: Удалите одну или несколько страниц из вашего PDF файла*\n\n*PowerPoint в PDF* : Конвертируйте ваши презентации \\(ppt, pptx\\) в PDF \\(до 100 файлов одновременно\\!\\)\n\n*Изображения в PDF*: Конвертируйте ваши изображения \\(img, png, bmp\\) в один PDF файл \\(до 100 файлов одновременно\\!\\)\n\n*Word в PDF*: Ковертируйте ваши документы \\(doc, docx\\) в PDF \\(до 100 файлов одновременно\\!\\)\n\n✨\n\nP\\. S\\. МЫ НЕ ХРАНИМ ВАШИ ДАННЫЕ"
     },
     "idle_msg": {
-        "en": "Thank you for choosing PDFile\\!\n\nWant to try something else\\?\n\nP\\. S\\. Your donations allow me to keep it free",
+        "en": "Thank you for choosing PDFile\\!\n\nHow else can I help you\\?\n\nP\\. S\\. Your donations make me happy",
         "ru": "Спасибо за выбор PDFile\\!\n\nЧем я еще могу вам помочь\\?\n\nP\\. S\\. Если PDFile был вам полезен, вы можете отблагодарить разработчика через кнопку \"Поддержать проект\""
     },
     "compress_pdf_text": {
@@ -40,8 +40,8 @@
         "ru": "Сжать"
     },
     "compress_input_text": {
-        "en": "Upload or forward your file(s)\n\nPress \"Compress\" when all files will be added\n\nP. S. Each file should not excess 20 mb (Telegram limits)",
-        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Сжать\" когда все файлы будут загружены\n\nP. S. Размер каждого файла не должен превышать 20 мб (ограничения Телеграма)"
+        "en": "Upload or forward your file(s)\n\nPress \"Compress\" when all files will be added\n\nP. S. Each file should not excess 20 mb (Telegram limits)\n\nP. P. S. It may take some time (< 1 min). I will send you compressed file(s) when it is ready",
+        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Сжать\" когда все файлы будут загружены\n\nP. S. Размер каждого файла не должен превышать 20 мб (ограничения Телеграма)\n\nP. P. S. Сжатие может занять некоторое время (обычно не больше одной минуты)"
     },
     "merge_text": {
         "en": "Merge",
@@ -84,8 +84,8 @@
         "ru": "Конвертировать"
     },
     "convert_input_text": {
-        "en": "Upload or forward your file(s)\n\nPress \"Convert\" when all files will be added\n\nP. S. Each file should not excess 20 mb (Telegram limits)",
-        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Конвертировать\" когда все файлы будут загружены\n\nP. S. Размер каждого файла не должен превышать 20 мб (ограничения Телеграма)"
+        "en": "Upload or forward your file(s)\n\nPress \"Convert\" when all files will be added\n\nP. S. Each file should not excess 20 mb (Telegram limits)\n\nP. P. S. It may take some time (< 1 min). I will send you converted file(s) when it is ready",
+        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Конвертировать\" когда все файлы будут загружены\n\nP. S. Размер каждого файла не должен превышать 20 мб (ограничения Телеграма)\n\nP. P. S. Конвертирование может занять некоторое время (обычно не больше одной минуты)"
     },
     "available_range_text": {
         "en": "Available patterns:\n\n*1,3,6*\npages 1,3,6\n\n*1\\-6, 8*\npages from 1 to 6 and 8\n\n*4\\-7,2,9*\npages from 4 to 7 and 2 and 9 \\(non\\-consecutive choice\\)\n\n*6\\-*\npages from 6 to end\n\n*4,7\\-9,11\\-*\npages 4, from 7 to 9 and from 11 to end\n\n",

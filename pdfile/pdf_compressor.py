@@ -14,7 +14,7 @@ Compression levels:
     4: screen
 
 Dependency: Ghostscript.
-On MacOSX install via command line `brew install ghostscript`.
+On MacOSX install via command line `sudo apt get install ghostscript`.
 """
 
 import argparse

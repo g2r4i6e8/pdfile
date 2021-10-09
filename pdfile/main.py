@@ -208,16 +208,18 @@ def donate(update,context, locale):
 def file_handler(update, context):
     userid = update.message.from_user.id
     try:
-        file = update.message.document.file_id
+        file = update.message.document
+        file_name = file['file_name']
     except:
-        file = update.message.photo[-1].file_id
+        file = update.message.photo[-1]
+        file_name = context.bot.get_file(file)['file_path'].split('/')[-1]
     obj = context.bot.get_file(file)
     file_url = obj['file_path']
     data = requests.get(file_url).content
     output_folder = os.path.join('temp', str(userid))
     if not os.path.exists(output_folder):
         os.makedirs(output_folder, exist_ok=True)
-    file_path = os.path.join(output_folder, file_url.split('/')[-1])
+    file_path = os.path.join(output_folder, file_name)
     with open(file_path, 'wb') as file:
         file.write(data)
     if 'list_of_files' in context.user_data:

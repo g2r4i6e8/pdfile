@@ -10,11 +10,11 @@ import requests
 import logging
 from telegram import ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from dotenv import load_dotenv
 import re
 from datetime import datetime
 import json
 import shutil
+import credentials
 
 """
 Universal Telegram Bot for working with PDF files.
@@ -194,7 +194,7 @@ def donate(update,context, locale):
     logger.info('User "%s" opened donate page', update.effective_user.id)
     keyboard = [[
         InlineKeyboardButton(txt_dict['donate_url_text'][locale],
-                             url = os.environ.get('donateLink'))
+                             url = credentials.donateLink)
     ]]
     
     update.message.bot.send_photo(
@@ -326,8 +326,7 @@ def help_command(update, context):
 def main():
     """Start the bot."""
     # Create the Updater and pass it your bot's token.
-    load_dotenv('../credentials.env')
-    updater = Updater(os.environ.get('secretToken'), use_context=True)
+    updater = Updater(credentials.secretToken, use_context=True)
     
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher

@@ -1,9 +1,6 @@
 .idea
 *.env
 pdfile/__pychache__
+tests/__pychache__
 pdfile/temp
-<<<<<<< HEAD
-tests/__pychache__
-=======
-tests/__pychache__
->>>>>>> main
+

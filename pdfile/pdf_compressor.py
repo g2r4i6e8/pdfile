@@ -75,7 +75,7 @@ def main():
 
     # In case no compression level is specified, default is 2 '/ printer'
     if not args.compress:
-        args.compress = 2
+        args.compress = 3
     # In case no output file is specified, store in temp file
     if not args.out:
         args.out = 'temp.pdf'

@@ -45,19 +45,12 @@ def compress(input_file_path, output_file_path, power=0):
         print("Error: input file is not a PDF")
         sys.exit(1)
 
-    print("Compress PDF...")
-    initial_size = os.path.getsize(input_file_path)
     subprocess.call(['gs', '-sDEVICE=pdfwrite', '-dCompatibilityLevel=1.4',
                     '-dPDFSETTINGS={}'.format(quality[power]),
                     '-dNOPAUSE', '-dQUIET', '-dBATCH',
                     '-sOutputFile={}'.format(output_file_path),
                      input_file_path]
     )
-    final_size = os.path.getsize(output_file_path)
-    ratio = 1 - (final_size / initial_size)
-    print("Compression by {0:.0%}.".format(ratio))
-    print("Final file size is {0:.1f}MB".format(final_size / 1000000))
-    print("Done.")
 
 
 def main():

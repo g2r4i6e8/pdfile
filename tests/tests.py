@@ -7,8 +7,6 @@ Created on Wed Sep 29 12:21:01 2021
 import os
 from pdfile import tools
 
-
-
 def run_tests():
     #test merge
     list_of_files = ['test_files/SML-LX23YC-TR-1.pdf', 'test_files/SML-LX23YC-TR-2.pdf']

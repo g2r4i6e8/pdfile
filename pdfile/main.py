@@ -27,7 +27,7 @@ logging.basicConfig(filename=logfile, filemode="w",
 
 logger = logging.getLogger(__name__)
 
-with open('../resources/txt_dict.json', 'r', encoding="utf8") as outfile:
+with open('txt_dict.json', 'r', encoding="utf8") as outfile:
     txt_dict = json.load(outfile)
             
     
@@ -194,7 +194,7 @@ def donate(update,context, locale):
     logger.info('User "%s" opened donate page', update.effective_user.id)
     keyboard = [[
         InlineKeyboardButton(txt_dict['donate_url_text'][locale],
-                             url = 'https://yoomoney.ru/to/4100117228897097')
+                             url = os.environ.get('donateLink'))
     ]]
     
     update.message.bot.send_photo(
@@ -206,7 +206,10 @@ def donate(update,context, locale):
     
 def file_handler(update, context):
     userid = update.message.from_user.id
-    file = update.message.document.file_id        
+    try:
+        file = update.message.document.file_id
+    except:
+        file = update.message.photo[-1].file_id
     obj = context.bot.get_file(file)
     file_url = obj['file_path']
     data = requests.get(file_url).content
@@ -221,7 +224,7 @@ def file_handler(update, context):
     elif 'file_path' in context.user_data:
         context.user_data['file_path'] = file_path
 
-def echo(update, context):
+def control(update, context):
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
     userid = update.message.from_user.id
     output_folder = os.path.join('temp', str(userid))
@@ -333,10 +336,9 @@ def main():
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('help', help_command))
     dispatcher.add_handler(MessageHandler(Filters.document, file_handler))
+    dispatcher.add_handler(MessageHandler(Filters.photo, file_handler))
     
-
-    # on non command i.e message - echo the message on Telegram
-    dispatcher.add_handler(MessageHandler(Filters.text, echo))
+    dispatcher.add_handler(MessageHandler(Filters.text, control))
 
     # Start the Bot
     updater.start_polling()

@@ -21,6 +21,7 @@ Universal Telegram Bot for working with PDF files.
 """
 
 # Enable logging
+os.makedirs('../logs', exist_ok=True)
 logfile = '../logs/{}.log'.format(datetime.now().strftime("%Y-%m-%dT%H"))
 logging.basicConfig(filename=logfile, filemode="w",
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)

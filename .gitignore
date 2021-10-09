@@ -4,3 +4,4 @@ pdfile/__pycache__
 tests/__pycache__
 pdfile/temp
 pdfile/credentials.py
+logs/

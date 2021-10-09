@@ -20,6 +20,9 @@ import credentials
 Universal Telegram Bot for working with PDF files.
 """
 
+#Setting up cwd
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
 # Enable logging
 os.makedirs('../logs', exist_ok=True)
 logfile = '../logs/{}.log'.format(datetime.now().strftime("%Y-%m-%dT%H"))

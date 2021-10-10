@@ -58,7 +58,7 @@ def start(update, context):
                               parse_mode='MarkdownV2',
                               reply_markup=markup)
     
-def idle(update, context, locale):
+def idle(update, context, headless=True):
     logger.info('User "%s" is idle', update.effective_user.id)
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
     reply_keyboard = [[txt_dict['compress_pdf_text'][locale],
@@ -67,15 +67,19 @@ def idle(update, context, locale):
                        [txt_dict['delete_pages_text'][locale]],
                        [txt_dict['ppt_to_pdf_text'][locale],
                         txt_dict['img_to_pdf_text'][locale],
-                        txt_dict['doc_to_pdf_text'][locale]],
-                       [txt_dict['donate_text'][locale]]]   
+                        txt_dict['doc_to_pdf_text'][locale]]]   
+    
+    if not headless: reply_keyboard.append([txt_dict['donate_text'][locale]])
     
     # global markup
     markup = ReplyKeyboardMarkup(reply_keyboard,
                                  resize_keyboard=True,
                                  one_time_keyboard=True)
+    idle_txt = txt_dict['idle_msg'][locale]
     
-    update.message.reply_text(txt_dict['idle_msg'][locale],
+    if headless: idle_txt = idle_txt.split('\n\n')[1]
+    
+    update.message.reply_text(idle_txt,
                               parse_mode='MarkdownV2',
                               reply_markup=markup)
 
@@ -243,7 +247,7 @@ def control(update, context):
         update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
         shutil.rmtree(output_folder)
         del context.user_data['list_of_files']
-        idle(update, context, locale)
+        idle(update, context)
     elif update.message.text == txt_dict['merge_pdf_text'][locale]:
         merge_cmd(update,context, locale)
     elif update.message.text == txt_dict['merge_text'][locale]:
@@ -252,7 +256,7 @@ def control(update, context):
         update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
         shutil.rmtree(output_folder)
         del context.user_data['list_of_files']
-        idle(update, context, locale)
+        idle(update, context, headless=False)
     elif update.message.text == txt_dict['split_pdf_text'][locale]:
         split_cmd(update, context, locale)
     elif update.message.text == txt_dict['split_one_text'][locale]:
@@ -264,7 +268,7 @@ def control(update, context):
         shutil.rmtree(output_folder)
         del context.user_data['file_path']
         del context.user_data['function']
-        idle(update, context, locale)
+        idle(update, context, headless=False)
     elif update.message.text == txt_dict['split_many_text'][locale]:
         output_path = tools.split(context.user_data['file_path'],
                                   context.user_data['split_range'],
@@ -274,7 +278,7 @@ def control(update, context):
         shutil.rmtree(output_folder)
         del context.user_data['file_path']
         del context.user_data['function']
-        idle(update, context, locale)
+        idle(update, context, headless=False)
     elif update.message.text == txt_dict['delete_pages_text'][locale]:
         delete_cmd(update, context, locale)
     elif update.message.text == txt_dict['delete_text'][locale]:
@@ -285,7 +289,7 @@ def control(update, context):
         shutil.rmtree(output_folder)
         del context.user_data['file_path']
         del context.user_data['function']
-        idle(update, context, locale)
+        idle(update, context, headless=False)
     elif update.message.text == txt_dict['ppt_to_pdf_text'][locale]:
         ppt2pdf(update, context, locale)
     elif update.message.text == txt_dict['img_to_pdf_text'][locale]:
@@ -306,16 +310,17 @@ def control(update, context):
         shutil.rmtree(output_folder)
         del context.user_data['list_of_files']
         del context.user_data['function']
-        idle(update, context, locale)
+        idle(update, context, headless=False)
     elif re.match('^\s*\d+[-\d+]*\s*(,\s*\d+[-\d+]*\s*)*\s*$', update.message.text):
         if context.user_data['function'] == 'split':
             split_cmd_2(update, context, locale)
         elif context.user_data['function'] == 'delete':
             delete_cmd_2(update, context, locale)
     elif update.message.text == txt_dict['cancel_text'][locale]:
-        idle(update, context, locale)
+        idle(update, context)
     elif update.message.text == txt_dict['donate_text'][locale]:
         donate(update, context, locale)
+        idle(update, context)
     else:
         update.message.reply_text(txt_dict['unknown_text'][locale])
         
@@ -341,6 +346,7 @@ def main():
     # on different commands - answer in Telegram
     dispatcher.add_handler(CommandHandler('start', start))
     dispatcher.add_handler(CommandHandler('help', help_command))
+    dispatcher.add_handler(CommandHandler('idle', idle))
     dispatcher.add_handler(MessageHandler(Filters.document, file_handler))
     dispatcher.add_handler(MessageHandler(Filters.photo, file_handler))
     

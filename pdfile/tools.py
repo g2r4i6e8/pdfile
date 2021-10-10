@@ -126,7 +126,10 @@ def doc2pdf(list_of_files, output_folder):
         fname = os.path.join(os.path.basename(file_path))
         filename = '{}.pdf'.format(''.join(fname.split('.')[:-1]))
         output_path = os.path.join(output_folder, filename)
-        libreoffice_converter.convert('doc2pdf', file_path, output_folder)
+        try:    
+            libreoffice_converter.convert('doc2pdf', file_path, output_folder)
+        except:
+            return None
     return output_path
 
 # convert ppt(x) to pdf
@@ -147,5 +150,8 @@ def ppt2pdf(list_of_files, output_folder):
         fname = os.path.join(os.path.basename(file_path))
         filename = '{}.pdf'.format(''.join(fname.split('.')[:-1]))
         output_path = os.path.join(output_folder, filename)
-        libreoffice_converter.convert('ppt2pdf', file_path, output_folder)
+        try:    
+            libreoffice_converter.convert('ppt2pdf', file_path, output_folder)
+        except:
+            return None
     return output_path

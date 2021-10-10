@@ -1,7 +1,7 @@
 {
     "start_msg": {
-        "en": "_Make your office life easier with PDFile\\!_\n\n*Compress PDF*: Reduce the size of your PDF without losing quality \\(up to 100 documents simultaneously\\!\\)\n\n*Merge PDF*: Combine multiple PDF files into one document\n\n*Split PDF*: Extract defined pages from your PDF into one document or save each page as a separate PDF\n\n*Delete PDF pages*: Remove one or multiple pages from your pdf\n\n*PowerPoint to PDF*: Convert PowerPoint documents \\(ppt, pptx\\) to PDF files \\(up to 100 files simultaneously\\!\\)\n\n*Images to PDF*: Convert one or multiple images \\(img, png, bmp\\) into one PDF \\(up to 100 images simultaneously\\!\\)\n\n*Word to PDF*: Convert Word documents \\(doc, docx\\) to PDF files \\(up to 100 documents simultaneously\\!\\)\n\nEnjoy\\! ✨\n\nP\\. S\\. WE DO NOT STORE YOUR DATA",
-        "ru": "_Сделай свою жизнь проще вместе с PDFile\\!_\n\n*Сжать PDF*: Уменьшайте размер вашего PDF-файла без потери качества \\(до 100 файлов одновременно\\!\\)\n\n*Объединить PDF*: Объединяйте несколько PDF файлов в один документ\n\n*Разделить PDF*: Выбирайте диапазон страниц, одну страницу или преобразовывайте каждую страницу документа в отдельный PDF-файл\n\n*Удалить страницы*: Удалите одну или несколько страниц из вашего PDF файла*\n\n*PowerPoint в PDF* : Конвертируйте ваши презентации \\(ppt, pptx\\) в PDF \\(до 100 файлов одновременно\\!\\)\n\n*Изображения в PDF*: Конвертируйте ваши изображения \\(img, png, bmp\\) в один PDF файл \\(до 100 файлов одновременно\\!\\)\n\n*Word в PDF*: Ковертируйте ваши документы \\(doc, docx\\) в PDF \\(до 100 файлов одновременно\\!\\)\n\n✨\n\nP\\. S\\. МЫ НЕ ХРАНИМ ВАШИ ДАННЫЕ"
+        "en": "_Make your office life easier with PDFile\\!_\n\n*Compress PDF*: Reduce the size of your PDF without losing quality \\(up to 100 documents simultaneously\\!\\)\n\n*Merge PDF*: Combine multiple PDF files into one document\n\n*Split PDF*: Extract defined pages from your PDF into one document or save each page as a separate PDF\n\n*Delete PDF pages*: Remove one or multiple pages from your pdf\n\n*PowerPoint to PDF*: Convert PowerPoint documents \\(ppt, pptx\\) to PDF files \\(up to 100 files simultaneously\\!\\)\n\n*Images to PDF*: Convert one or multiple images \\(img, png, bmp\\) into one PDF \\(up to 100 images simultaneously\\!\\)\n\n*Word to PDF*: Convert Word documents \\(doc, docx\\) to PDF files \\(up to 100 documents simultaneously\\!\\)\n\nEnjoy\\! ✨\n\nWE DO NOT STORE YOUR DATA 🔒",
+        "ru": "_Сделай свою жизнь проще вместе с PDFile\\!_\n\n*Сжать PDF*: Уменьшайте размер вашего PDF\\-файла без потери качества \\(до 100 файлов одновременно\\!\\)\n\n*Объединить PDF*: Объединяйте несколько PDF файлов в один документ\n\n*Разделить PDF*: Выбирайте диапазон страниц, одну страницу или преобразовывайте каждую страницу документа в отдельный PDF\\-файл\n\n*Удалить страницы*: Удалите одну или несколько страниц из вашего PDF файла*\n\n*PowerPoint в PDF* : Конвертируйте ваши презентации \\(ppt, pptx\\) в PDF \\(до 100 файлов одновременно\\!\\)\n\n*Изображения в PDF*: Конвертируйте ваши изображения \\(img, png, bmp\\) в один PDF файл \\(до 100 файлов одновременно\\!\\)\n\n*Word в PDF*: Ковертируйте ваши документы \\(doc, docx\\) в PDF \\(до 100 файлов одновременно\\!\\)\n\n✨\n\nМЫ НЕ ХРАНИМ ВАШИ ДАННЫЕ 🔒"
     },
     "idle_msg": {
         "en": "Thank you for choosing PDFile\\!\n\nHow else can I help you\\?\n\nP\\. S\\. Your donations make me happy",
@@ -40,16 +40,16 @@
         "ru": "Сжать"
     },
     "compress_input_text": {
-        "en": "Upload or forward your file(s)\n\nPress \"Compress\" when all files will be added\n\nP. S. Each file should not excess 20 mb (Telegram limits)\n\nP. P. S. It may take some time (< 1 min). I will send you compressed file(s) when it is ready",
-        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Сжать\" когда все файлы будут загружены\n\nP. S. Размер каждого файла не должен превышать 20 мб (ограничения Телеграма)\n\nP. P. S. Сжатие может занять некоторое время (обычно не больше одной минуты)"
+        "en": "Upload or forward your file(s)\n\nPress \"Compress\" when all files will be added\n\nEach file should not excess 20 mb (Telegram limits)\n\nCompression may take some time (< 1 min). I will send you compressed file(s) when it is ready",
+        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Сжать\" когда все файлы будут загружены\n\nРазмер каждого файла не должен превышать 20 мб (ограничения Телеграма)\n\nСжатие может занять некоторое время (обычно не больше одной минуты)"
     },
     "merge_text": {
         "en": "Merge",
         "ru": "Объединить"
     },
     "merge_input_text": {
-        "en": "Upload or forward your file(s)\n\nPress \"Merge\" when all files will be added\n\nP. S. Each file should not excess 20 mb (Telegram limits)",
-        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Объединить\" когда все файлы будут загружены\n\nP. S. Размер каждого файла не должен превышать 20 мб (ограничения Телеграма)"
+        "en": "Upload or forward your file(s)\n\nPress \"Merge\" when all files will be added\n\nEach file should not excess 20 mb (Telegram limits)",
+        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Объединить\" когда все файлы будут загружены\n\nРазмер каждого файла не должен превышать 20 мб (ограничения Телеграма)"
     },
     "split_one_text": {
         "en": "Extract pages to a single file",
@@ -72,8 +72,8 @@
         "ru": "Удалить страницы"
     },
     "delete_input_text": {
-        "en": "Upload or forward your file and write down pages to delete\n\nP. S. Each file should not excess 20 mb (Telegram limits)",
-        "ru": "Загрузи или перешли файл и напиши страницы для удаления\n\nP. S. Размер каждого файла не должен превышать 20 мб (ограничения Телеграма)"
+        "en": "Upload or forward your file and write down pages to delete\n\nEach file should not excess 20 mb (Telegram limits)",
+        "ru": "Загрузи или перешли файл и напиши страницы для удаления\n\nРазмер каждого файла не должен превышать 20 мб (ограничения Телеграма)"
     },
     "delete_call_text": {
         "en": "Press \"Delete pages\"",
@@ -84,8 +84,8 @@
         "ru": "Конвертировать"
     },
     "convert_input_text": {
-        "en": "Upload or forward your file(s)\n\nPress \"Convert\" when all files will be added\n\nP. S. Each file should not excess 20 mb (Telegram limits)\n\nP. P. S. It may take some time (< 1 min). I will send you converted file(s) when it is ready",
-        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Конвертировать\" когда все файлы будут загружены\n\nP. S. Размер каждого файла не должен превышать 20 мб (ограничения Телеграма)\n\nP. P. S. Конвертирование может занять некоторое время (обычно не больше одной минуты)"
+        "en": "Upload or forward your file(s)\n\nPress \"Convert\" when all files will be added\n\nEach file should not excess 20 mb (Telegram limits)\n\nConversion may take some time (< 1 min). I will send you converted file(s) when it is ready",
+        "ru": "Загрузи или перешли файл(ы)\n\nНажми \"Конвертировать\" когда все файлы будут загружены\n\nРазмер каждого файла не должен превышать 20 мб (ограничения Телеграма)\n\nКонвертирование может занять некоторое время (обычно не больше одной минуты)"
     },
     "available_range_text": {
         "en": "Available patterns:\n\n*1,3,6*\npages 1,3,6\n\n*1\\-6, 8*\npages from 1 to 6 and 8\n\n*4\\-7,2,9*\npages from 4 to 7 and 2 and 9 \\(non\\-consecutive choice\\)\n\n*6\\-*\npages from 6 to end\n\n*4,7\\-9,11\\-*\npages 4, from 7 to 9 and from 11 to end\n\n",
@@ -108,15 +108,15 @@
         "ru": "Привет! Меня зовут Андрей Коломацкий и я - разработчик PDFile.\nPDFile полностью бесплатный для использования, а еще в нем нет никакой рекламы. Но для стабильной работы бота требуется оплата серверов, работающих 24/7. Плата за аренду серверов формируется из донатов пользователей.\nЕсли тебе нравится PDFile, поддержи меня. Нажми на кнопку \"Поддержать проект\" и перведи любую сумму на мой счет.\nСпасибо! 🙏"
     },
     "unknown_text": {
-        "en": "Sorry, I do not understand you.",
-        "ru": "Извини, я тебя не понимаю."
+        "en": "Sorry, I do not understand you.\nPlease, try again or ask the developer: @akolomatskiy",
+        "ru": "Извини, я тебя не понимаю.\nЕсли возникли вопросы, напиши @akolomatskiy"
     },
     "error_text": {
-        "en": "Sorry, something went wrong. Please, try again or ask the developer: https://t.me/akolomatskiy",
-        "ru": "Что-то пошло не так. Попробуй снова или напиши разработчику: https://t.me/akolomatskiy"
+        "en": "Sorry, something went wrong.\nPlease, try again or ask the developer: @akolomatskiy",
+        "ru": "Что-то пошло не так. Попробуй снова или напиши @akolomatskiy"
     },
     "help_text": {
-        "en": "Do you need help or want to leave a feedback? Please, contact the developer: https://t.me/akolomatskiy",
-        "ru": "Нужна помощь или хочешь оставить обратную свзяь? Пожалуйста, напиши разработчику: https://t.me/akolomatskiy"
+        "en": "Do you need help or want to leave a feedback? Please, contact the developer: @akolomatskiy",
+        "ru": "Нужна помощь или хочешь оставить обратную свзяь? Пожалуйста, напиши @akolomatskiy"
     }
 }

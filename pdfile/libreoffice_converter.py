@@ -29,12 +29,12 @@ def convert(conversion_type, input_file_path, output_dir):
     # Basic controls
     # Check if valid path
     if not os.path.isfile(input_file_path):
-        print("Error: invalid path for input PDF file")
+        raise Exception("Error: invalid path for input PDF file")
         sys.exit(1)
 
     # Check if file is a doc(x) or ppt(x) by extension
     if input_file_path.split('.')[-1].lower() not in ['doc', 'docx', 'ppt', 'pptx']:
-        print("Error: input file is not a PDF")
+        raise Exception("Error: Filetype is not supported")
         sys.exit(1)
 
     subprocess.call(['libreoffice', '--headless', '--convert-to', export_type[conversion_type],

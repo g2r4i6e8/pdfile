@@ -1,0 +1,14 @@
+{
+    "big_file": {
+        "en": "File is too big. It will not be processed. Maximum file size is 20 mb (Telegram limits).",
+        "ru": "Файл слишком большой. Допустимый размер загружаемых файлов - до 20 мб (ограничения Телеграма)."
+    },
+    "no_files": {
+        "en": "No files were loaded. Process failed. Please, try again.",
+        "ru": "Не загружен ни один файл. Невозможно выполнить операцию. Пожалуйста, попробуйте снова."
+    },
+    "func_failed": {
+        "en": "Oops, something went wrong while processing your file(s). Please, try again later.",
+        "ru": "Ой, во время выполнения операции произошла непредвиденная ошибка. Пожалуйста, попробуйте позже."
+    }
+}

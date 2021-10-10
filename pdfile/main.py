@@ -16,6 +16,7 @@ from datetime import datetime
 import json
 import shutil
 import credentials
+from unidecode import unidecode
 
 """
 Universal Telegram Bot for working with PDF files.
@@ -32,9 +33,11 @@ logging.basicConfig(filename=logfile, filemode="w",
 
 logger = logging.getLogger(__name__)
 
-with open('txt_dict.json', 'r', encoding="utf8") as outfile:
-    txt_dict = json.load(outfile)
-            
+with open('txt_dict.json', 'r', encoding="utf8") as file:
+    txt_dict = json.load(file)
+    
+with open('errors_dict.json', 'r', encoding="utf8") as file:
+    errors_dict = json.load(file)
     
 def start(update, context):
     """Send a message when the command /start is issued."""
@@ -57,7 +60,7 @@ def start(update, context):
     update.message.reply_text(txt_dict['start_msg'][locale],
                               parse_mode='MarkdownV2',
                               reply_markup=markup)
-    
+        
 def idle(update, context, headless=True):
     logger.info('User "%s" is idle', update.effective_user.id)
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
@@ -121,9 +124,9 @@ def split_cmd(update, context, locale):
     context.user_data['function'] = 'split'
     
 def split_cmd_2(update, context, locale):
-    reply_keyboard = [[txt_dict['split_one_text'][locale],
-                       txt_dict['split_many_text'][locale],
-                      txt_dict['cancel_text'][locale]]]
+    reply_keyboard = [[txt_dict['split_one_text'][locale]],
+                       [txt_dict['split_many_text'][locale]],
+                      [txt_dict['cancel_text'][locale]]]
     
     markup = ReplyKeyboardMarkup(reply_keyboard,
                                  resize_keyboard=True,
@@ -215,12 +218,20 @@ def donate(update,context, locale):
     
 def file_handler(update, context):
     userid = update.message.from_user.id
+    locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
     try:
         file = update.message.document
         file_name = file['file_name']
     except:
         file = update.message.photo[-1]
         file_name = context.bot.get_file(file)['file_path'].split('/')[-1]
+    file_name = unidecode(file_name)
+    file_size = file['file_size']
+    logger.info('User "%s" uploaded a file %s with file size %d bytes',
+                update.effective_user.id, file_name, file_size)
+    if file_size >= 20971520:
+        update.message.reply_text(errors_dict['big_file'][locale])
+        return None
     obj = context.bot.get_file(file)
     file_url = obj['file_path']
     data = requests.get(file_url).content
@@ -234,6 +245,16 @@ def file_handler(update, context):
         context.user_data['list_of_files'].append(file_path)
     elif 'file_path' in context.user_data:
         context.user_data['file_path'] = file_path
+    
+def cleaner(output_folder, context):
+    try:
+        shutil.rmtree(output_folder)
+    except:
+        pass
+    try:
+        context.user_data.clear()
+    except: 
+        pass
 
 def control(update, context):
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
@@ -242,54 +263,87 @@ def control(update, context):
     if update.message.text == txt_dict['compress_pdf_text'][locale]:
         compress_cmd(update,context, locale)
     elif update.message.text == txt_dict['compress_text'][locale]:
-        output_path = tools.compress(context.user_data['list_of_files'], 
-                                     output_folder)
-        update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        shutil.rmtree(output_folder)
-        del context.user_data['list_of_files']
-        idle(update, context)
+        if len(context.user_data['list_of_files']) >= 1:
+            try:
+                output_path = tools.compress(context.user_data['list_of_files'], 
+                                         output_folder)
+                update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                idle(update, context, headless=False)
+            except Exception as e:
+                update.message.reply_text(errors_dict['func_failed'][locale])
+                logger.error('User "%s" raised error %s while compressing',
+                             update.effective_user.id, e)
+                idle(update, context, headless=True)
+        else:
+            update.message.reply_text(errors_dict['no_files'][locale])
+            idle(update, context, headless=True)
+        cleaner(output_folder, context)
     elif update.message.text == txt_dict['merge_pdf_text'][locale]:
         merge_cmd(update,context, locale)
     elif update.message.text == txt_dict['merge_text'][locale]:
-        output_path = tools.merge(context.user_data['list_of_files'], 
-                                  output_folder)
-        update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        shutil.rmtree(output_folder)
-        del context.user_data['list_of_files']
-        idle(update, context, headless=False)
+        if len(context.user_data['list_of_files']) >= 1:
+            try:
+                output_path = tools.merge(context.user_data['list_of_files'], 
+                                          output_folder)
+                update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                idle(update, context, headless=False)
+            except Exception as e:
+                update.message.reply_text(errors_dict['func_failed'][locale])
+                logger.error('User "%s" raised error %s while merging',
+                             update.effective_user.id, e)
+                idle(update, context, headless=True)
+        else:
+            update.message.reply_text(errors_dict['no_files'][locale])
+            idle(update, context, headless=True)
+        cleaner(output_folder, context)
     elif update.message.text == txt_dict['split_pdf_text'][locale]:
         split_cmd(update, context, locale)
     elif update.message.text == txt_dict['split_one_text'][locale]:
-        output_path = tools.split(context.user_data['file_path'],
-                                  context.user_data['split_range'],
-                                  output_folder,
-                                  separate_pages = False)
-        update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        shutil.rmtree(output_folder)
-        del context.user_data['file_path']
-        del context.user_data['function']
-        idle(update, context, headless=False)
+        if context.user_data['file_path'] != '':
+            try:
+                output_path = tools.split(context.user_data['file_path'],
+                                          context.user_data['split_range'],
+                                          output_folder,
+                                          separate_pages = False)
+                update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                idle(update, context, headless=False)
+            except Exception as e:
+                update.message.reply_text(errors_dict['func_failed'][locale])
+                logger.error('User "%s" raised error %s while splitting',
+                             update.effective_user.id, e)
+                idle(update, context, headless=True)
+        cleaner(output_folder, context)
     elif update.message.text == txt_dict['split_many_text'][locale]:
-        output_path = tools.split(context.user_data['file_path'],
-                                  context.user_data['split_range'],
-                                  output_folder,
-                                  separate_pages = True)
-        update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        shutil.rmtree(output_folder)
-        del context.user_data['file_path']
-        del context.user_data['function']
-        idle(update, context, headless=False)
+        if context.user_data['file_path'] != '':
+            try:
+                output_path = tools.split(context.user_data['file_path'],
+                                          context.user_data['split_range'],
+                                          output_folder,
+                                          separate_pages = True)
+                update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                idle(update, context, headless=False)
+            except Exception as e:
+                update.message.reply_text(errors_dict['func_failed'][locale])
+                logger.error('User "%s" raised error %s while splitting',
+                             update.effective_user.id, e)
+                idle(update, context, headless=True)
+        cleaner(output_folder, context)
     elif update.message.text == txt_dict['delete_pages_text'][locale]:
         delete_cmd(update, context, locale)
     elif update.message.text == txt_dict['delete_text'][locale]:
-        output_path = tools.delete(context.user_data['file_path'],
-                                   context.user_data['split_range'],
-                                   output_folder)
-        update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        shutil.rmtree(output_folder)
-        del context.user_data['file_path']
-        del context.user_data['function']
-        idle(update, context, headless=False)
+        if context.user_data['file_path'] != '':
+            try:
+                output_path = tools.delete(context.user_data['file_path'],
+                                           context.user_data['split_range'],
+                                           output_folder)
+                update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                idle(update, context, headless=False)
+            except Exception as e:
+                update.message.reply_text(errors_dict['func_failed'][locale])
+                logger.error('User "%s" raised error %s while deleting',
+                             update.effective_user.id, e)
+                idle(update, context, headless=True)
+        cleaner(output_folder, context)
     elif update.message.text == txt_dict['ppt_to_pdf_text'][locale]:
         ppt2pdf(update, context, locale)
     elif update.message.text == txt_dict['img_to_pdf_text'][locale]:
@@ -297,39 +351,47 @@ def control(update, context):
     elif update.message.text == txt_dict['doc_to_pdf_text'][locale]:
         doc2pdf(update, context, locale)
     elif update.message.text == txt_dict['convert_text'][locale]:
-        if context.user_data['function'] == 'img2pdf':
-            output_path = tools.img2pdf(context.user_data['list_of_files'],
-                                       output_folder)
-        elif context.user_data['function'] == 'doc2pdf':
-            output_path = tools.doc2pdf(context.user_data['list_of_files'],
-                                       output_folder)
-        elif context.user_data['function'] == 'ppt2pdf':
-            output_path = tools.ppt2pdf(context.user_data['list_of_files'],
-                                       output_folder)
-        update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-        shutil.rmtree(output_folder)
-        del context.user_data['list_of_files']
-        del context.user_data['function']
-        idle(update, context, headless=False)
+        if len(context.user_data['list_of_files']) >= 1:
+            try:
+                if context.user_data['function'] == 'img2pdf':
+                    output_path = tools.img2pdf(context.user_data['list_of_files'],
+                                               output_folder)
+                elif context.user_data['function'] == 'doc2pdf':
+                    output_path = tools.doc2pdf(context.user_data['list_of_files'],
+                                               output_folder)
+                elif context.user_data['function'] == 'ppt2pdf':
+                    output_path = tools.ppt2pdf(context.user_data['list_of_files'],
+                                               output_folder)
+                update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                idle(update, context, headless=False)
+            except Exception as e:
+                update.message.reply_text(errors_dict['func_failed'][locale])
+                logger.error('User "%s" raised error %s while converting %s',
+                             update.effective_user.id, e, context.user_data['function'])
+                idle(update, context, headless=True)
+        else:
+            update.message.reply_text(errors_dict['no_files'][locale])
+            idle(update, context, headless=True)
+        cleaner(output_folder, context)
     elif re.match('^\s*\d+[-\d+]*\s*(,\s*\d+[-\d+]*\s*)*\s*$', update.message.text):
-        if context.user_data['function'] == 'split':
-            split_cmd_2(update, context, locale)
-        elif context.user_data['function'] == 'delete':
-            delete_cmd_2(update, context, locale)
+        if context.user_data['file_path'] != '':
+            if context.user_data['function'] == 'split':
+                split_cmd_2(update, context, locale)
+            elif context.user_data['function'] == 'delete':
+                delete_cmd_2(update, context, locale)
+        else:
+            update.message.reply_text(errors_dict['no_files'][locale])
+            idle(update, context, headless=True)
+            cleaner(output_folder, context)
     elif update.message.text == txt_dict['cancel_text'][locale]:
-        idle(update, context)
+        cleaner(output_folder, context)
+        idle(update, context, headless=True)
     elif update.message.text == txt_dict['donate_text'][locale]:
         donate(update, context, locale)
-        idle(update, context)
+        idle(update, context, headless=True)
     else:
         update.message.reply_text(txt_dict['unknown_text'][locale])
-        
-def error(update, context):
-    """Log Errors caused by Updates."""
-    locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
-    update.message.reply_text(txt_dict['error_text'][locale])
-    
+            
 def help_command(update, context):
     """Send a message when the command /help is issued."""
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
@@ -349,7 +411,6 @@ def main():
     dispatcher.add_handler(CommandHandler('idle', idle))
     dispatcher.add_handler(MessageHandler(Filters.document, file_handler))
     dispatcher.add_handler(MessageHandler(Filters.photo, file_handler))
-    
     dispatcher.add_handler(MessageHandler(Filters.text, control))
 
     # Start the Bot

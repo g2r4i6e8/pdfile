@@ -41,8 +41,8 @@ with open('errors_dict.json', 'r', encoding="utf8") as file:
     
 def start(update, context):
     """Send a message when the command /start is issued."""
-    logger.info('User "%s" with language code "%s" started the bot instance',
-                update.effective_user.id, update.effective_user.language_code)
+    logger.info('User "%s" (%s) with language code "%s" started the bot instance',
+                update.effective_user.id, update.effective_user.username, update.effective_user.language_code)
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
     reply_keyboard = [[txt_dict['compress_pdf_text'][locale],
                       txt_dict['merge_pdf_text'][locale],

@@ -37,7 +37,10 @@ def compress(list_of_files, output_folder):
         file_path = list_of_files[0]
         fname = os.path.join(os.path.basename(file_path).replace('.pdf', ''))
         output_path = os.path.join(output_folder, '{}_compressed.pdf'.format(fname))
-        pdf_compressor.compress(file_path, output_path)
+        try:    
+            pdf_compressor.compress(file_path, output_path)
+        except:
+            return None
         
     
     return output_path

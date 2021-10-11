@@ -49,7 +49,9 @@ def compress(list_of_files, output_folder):
 def merge(list_of_files, output_folder):
     merger = PdfFileMerger()
     for file_path in list_of_files:
-        merger.append(PdfFileReader(file_path, 'rb'))
+        input_file = open(file_path, 'rb')
+        pdf_reader = PdfFileReader(input_file, strict=False)
+        merger.append(pdf_reader)
     output_path = os.path.join(output_folder, 'document_merged.pdf')
     with open(output_path, 'wb') as outputStream:
         merger.write(outputStream)
@@ -58,7 +60,7 @@ def merge(list_of_files, output_folder):
 # split pdf document into one or into separate files page by page
 def split(file_path, split_range_string, output_folder, separate_pages = False):
     input_file = open(file_path, 'rb')
-    pdf_reader = PdfFileReader(input_file)
+    pdf_reader = PdfFileReader(input_file, strict=False)
     split_range = create_range(split_range_string, pdf_reader.getNumPages())
     fname = os.path.join(os.path.basename(file_path).replace('.pdf', ''))
     if separate_pages:
@@ -98,7 +100,7 @@ def img2pdf(list_of_files, output_folder):
 # delete pages from pdf
 def delete(file_path, split_range_string, output_folder):
     input_file = open(file_path, 'rb')
-    pdf_reader = PdfFileReader(input_file)
+    pdf_reader = PdfFileReader(input_file, strict=False)
     pages_to_delete = create_range(split_range_string, pdf_reader.getNumPages())
     pages_to_keep = [p for p in range(pdf_reader.getNumPages()) if p+1 not in pages_to_delete]
     keeper = PdfFileWriter()

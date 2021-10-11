@@ -4,8 +4,8 @@
         "ru": "Файл слишком большой. Допустимый размер загружаемых файлов - до 20 мб (ограничения Телеграма)."
     },
     "unsupported_format": {
-        "en": "Unsupported file format. It will not be processed. Supported format(s): ",
-        "ru": "Недопустимый формат файла. Файл не будет загружен. Файл должен иметь один из следующих форматов: "
+        "en": " has unsupported file format. It will not be processed. Supported format(s): ",
+        "ru": " имеет недопустимый формат файла. Файл не будет загружен. Файл должен иметь один из следующих форматов: "
     },
     "no_files": {
         "en": "No files were loaded. Process failed. Please, try again.",

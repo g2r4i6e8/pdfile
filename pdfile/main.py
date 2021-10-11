@@ -249,7 +249,7 @@ def file_handler(update, context):
         return None
     invalid_format, formats = check_invalid_format(file_name, context.user_data['function'])
     if invalid_format:
-        update.message.reply_text(errors_dict['unsupported_format'][locale] + ', '.join(formats))
+        update.message.reply_text(file_name + errors_dict['unsupported_format'][locale] + ', '.join(formats))
         logger.error('User "%s" raised unsupported file format error',
                      update.effective_user.id)
         return None

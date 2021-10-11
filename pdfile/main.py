@@ -99,6 +99,7 @@ def compress_cmd(update, context, locale):
                               reply_markup=markup)
     
     context.user_data['list_of_files'] = []
+    context.user_data['function'] = 'compress'
     
 def merge_cmd(update, context, locale):
     logger.info('User "%s" chose to merge PDF', update.effective_user.id)
@@ -113,6 +114,7 @@ def merge_cmd(update, context, locale):
                               reply_markup=markup)
     
     context.user_data['list_of_files'] = []
+    context.user_data['function'] = 'merge'
 
 def split_cmd(update, context, locale):
     logger.info('User "%s" chose to split PDF', update.effective_user.id)
@@ -216,6 +218,17 @@ def donate(update,context, locale):
     reply_markup=InlineKeyboardMarkup(keyboard)
 )
     
+def check_invalid_format(file_name, function):
+    format_functions = {'compress': ['pdf'], 'merge': ['pdf'], 'split': ['pdf'],
+                        'delete': ['pdf'], 'ppt2pdf': ['ppt', 'pptx', 'odp'],
+                        'img2pdf': ['jpg', 'jpeg', 'png', 'gif', 'tiff', 'WebP', 'bmp'],
+                        'doc2pdf': ['odt', 'doc', 'docx']}
+    if file_name.split('.')[-1].lower() not in format_functions[function]:
+        return True, format_functions[function]
+    else:
+        return False, format_functions[function]
+    
+    
 def file_handler(update, context):
     userid = update.message.from_user.id
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
@@ -231,6 +244,10 @@ def file_handler(update, context):
                 update.effective_user.id, file_name, file_size)
     if file_size >= 20971520:
         update.message.reply_text(errors_dict['big_file'][locale])
+        return None
+    invalid_format, formats = check_invalid_format(file_name, context.user_data['function'])
+    if invalid_format:
+        update.message.reply_text(errors_dict['unsupported_format'][locale] + ', '.join(formats))
         return None
     obj = context.bot.get_file(file)
     file_url = obj['file_path']
@@ -260,9 +277,9 @@ def control(update, context):
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
     userid = update.message.from_user.id
     output_folder = os.path.join('temp', str(userid))
-    if update.message.text == txt_dict['compress_pdf_text'][locale]:
+    if update.message.text in txt_dict['compress_pdf_text'].values():
         compress_cmd(update,context, locale)
-    elif update.message.text == txt_dict['compress_text'][locale]:
+    elif update.message.text in txt_dict['compress_text'].values():
         if len(context.user_data['list_of_files']) >= 1:
             try:
                 output_path = tools.compress(context.user_data['list_of_files'], 
@@ -278,9 +295,9 @@ def control(update, context):
             update.message.reply_text(errors_dict['no_files'][locale])
             idle(update, context, headless=True)
         cleaner(output_folder, context)
-    elif update.message.text == txt_dict['merge_pdf_text'][locale]:
+    elif update.message.text in txt_dict['merge_pdf_text'].values():
         merge_cmd(update,context, locale)
-    elif update.message.text == txt_dict['merge_text'][locale]:
+    elif update.message.text in txt_dict['merge_text'].values():
         if len(context.user_data['list_of_files']) >= 1:
             try:
                 output_path = tools.merge(context.user_data['list_of_files'], 
@@ -296,9 +313,9 @@ def control(update, context):
             update.message.reply_text(errors_dict['no_files'][locale])
             idle(update, context, headless=True)
         cleaner(output_folder, context)
-    elif update.message.text == txt_dict['split_pdf_text'][locale]:
+    elif update.message.text in txt_dict['split_pdf_text'].values():
         split_cmd(update, context, locale)
-    elif update.message.text == txt_dict['split_one_text'][locale]:
+    elif update.message.text in txt_dict['split_one_text'].values():
         if context.user_data['file_path'] != '':
             try:
                 output_path = tools.split(context.user_data['file_path'],
@@ -313,7 +330,7 @@ def control(update, context):
                              update.effective_user.id, e)
                 idle(update, context, headless=True)
         cleaner(output_folder, context)
-    elif update.message.text == txt_dict['split_many_text'][locale]:
+    elif update.message.text in txt_dict['split_many_text'].values():
         if context.user_data['file_path'] != '':
             try:
                 output_path = tools.split(context.user_data['file_path'],
@@ -328,9 +345,9 @@ def control(update, context):
                              update.effective_user.id, e)
                 idle(update, context, headless=True)
         cleaner(output_folder, context)
-    elif update.message.text == txt_dict['delete_pages_text'][locale]:
+    elif update.message.text in txt_dict['delete_pages_text'].values():
         delete_cmd(update, context, locale)
-    elif update.message.text == txt_dict['delete_text'][locale]:
+    elif update.message.text in txt_dict['delete_text'].values():
         if context.user_data['file_path'] != '':
             try:
                 output_path = tools.delete(context.user_data['file_path'],
@@ -344,13 +361,13 @@ def control(update, context):
                              update.effective_user.id, e)
                 idle(update, context, headless=True)
         cleaner(output_folder, context)
-    elif update.message.text == txt_dict['ppt_to_pdf_text'][locale]:
+    elif update.message.text in txt_dict['ppt_to_pdf_text'].values():
         ppt2pdf(update, context, locale)
-    elif update.message.text == txt_dict['img_to_pdf_text'][locale]:
+    elif update.message.text in txt_dict['img_to_pdf_text'].values():
         img2pdf(update, context, locale)
-    elif update.message.text == txt_dict['doc_to_pdf_text'][locale]:
+    elif update.message.text in txt_dict['doc_to_pdf_text'].values():
         doc2pdf(update, context, locale)
-    elif update.message.text == txt_dict['convert_text'][locale]:
+    elif update.message.text in txt_dict['convert_text'].values():
         if len(context.user_data['list_of_files']) >= 1:
             try:
                 if context.user_data['function'] == 'img2pdf':
@@ -383,10 +400,10 @@ def control(update, context):
             update.message.reply_text(errors_dict['no_files'][locale])
             idle(update, context, headless=True)
             cleaner(output_folder, context)
-    elif update.message.text == txt_dict['cancel_text'][locale]:
+    elif update.message.text in txt_dict['cancel_text'].values():
         cleaner(output_folder, context)
         idle(update, context, headless=True)
-    elif update.message.text == txt_dict['donate_text'][locale]:
+    elif update.message.text in txt_dict['donate_text'].values():
         donate(update, context, locale)
         idle(update, context, headless=True)
     else:

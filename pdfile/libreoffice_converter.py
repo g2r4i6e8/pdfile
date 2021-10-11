@@ -33,7 +33,7 @@ def convert(conversion_type, input_file_path, output_dir):
         sys.exit(1)
 
     # Check if file is a doc(x) or ppt(x) by extension
-    if input_file_path.split('.')[-1].lower() not in ['doc', 'docx', 'ppt', 'pptx']:
+    if input_file_path.split('.')[-1].lower() not in ['odt', 'doc', 'docx', 'odp', 'ppt', 'pptx']:
         raise Exception("Error: Filetype is not supported")
         sys.exit(1)
 

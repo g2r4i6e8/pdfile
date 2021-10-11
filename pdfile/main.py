@@ -62,7 +62,8 @@ def start(update, context):
                               reply_markup=markup)
         
 def idle(update, context, headless=True):
-    logger.info('User "%s" is idle', update.effective_user.id)
+    logger.info('User "%s" (%s) is idle',
+                update.effective_user.id, update.effective_user.username)
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
     reply_keyboard = [[txt_dict['compress_pdf_text'][locale],
                       txt_dict['merge_pdf_text'][locale],
@@ -87,7 +88,8 @@ def idle(update, context, headless=True):
                               reply_markup=markup)
 
 def compress_cmd(update, context, locale):
-    logger.info('User "%s" chose to compress PDF', update.effective_user.id)
+    logger.info('User "%s" (%s) chose to compress PDF',
+                update.effective_user.id, update.effective_user.username)
     reply_keyboard = [[txt_dict['compress_text'][locale],
                       txt_dict['cancel_text'][locale]]]
     
@@ -102,7 +104,8 @@ def compress_cmd(update, context, locale):
     context.user_data['function'] = 'compress'
     
 def merge_cmd(update, context, locale):
-    logger.info('User "%s" chose to merge PDF', update.effective_user.id)
+    logger.info('User "%s" (%s) chose to merge PDF',
+                update.effective_user.id, update.effective_user.username)
     reply_keyboard = [[txt_dict['merge_text'][locale],
                       txt_dict['cancel_text'][locale]]]
     
@@ -117,7 +120,8 @@ def merge_cmd(update, context, locale):
     context.user_data['function'] = 'merge'
 
 def split_cmd(update, context, locale):
-    logger.info('User "%s" chose to split PDF', update.effective_user.id)
+    logger.info('User "%s" (%s) chose to split PDF',
+                update.effective_user.id, update.effective_user.username)
     update.message.reply_text(txt_dict['split_input_text'][locale])
     update.message.reply_text(txt_dict['available_range_text'][locale],
                               parse_mode='MarkdownV2')
@@ -139,7 +143,8 @@ def split_cmd_2(update, context, locale):
                               reply_markup=markup)
 
 def delete_cmd(update, context, locale):
-    logger.info('User "%s" chose to delete pages', update.effective_user.id)
+    logger.info('User "%s" (%s) chose to delete pages',
+                update.effective_user.id, update.effective_user.username)
     update.message.reply_text(txt_dict['delete_input_text'][locale])
     update.message.reply_text(txt_dict['available_range_text'][locale],
                               parse_mode='MarkdownV2')
@@ -160,7 +165,8 @@ def delete_cmd_2(update, context, locale):
                               reply_markup=markup)
         
 def img2pdf(update, context, locale):
-    logger.info('User "%s" chose to convert images to pdf', update.effective_user.id)
+    logger.info('User "%s" (%s) chose to convert images to pdf',
+                update.effective_user.id, update.effective_user.username)
     reply_keyboard = [[txt_dict['convert_text'][locale],
                       txt_dict['cancel_text'][locale]]]
     
@@ -175,7 +181,8 @@ def img2pdf(update, context, locale):
     context.user_data['function'] = 'img2pdf'
     
 def doc2pdf(update, context, locale):
-    logger.info('User "%s" chose to convert doc to pdf', update.effective_user.id)
+    logger.info('User "%s" (%s) chose to convert doc to pdf',
+                update.effective_user.id, update.effective_user.username)
     reply_keyboard = [[txt_dict['convert_text'][locale],
                       txt_dict['cancel_text'][locale]]]
     
@@ -190,7 +197,8 @@ def doc2pdf(update, context, locale):
     context.user_data['function'] = 'doc2pdf'
     
 def ppt2pdf(update,context, locale):
-    logger.info('User "%s" chose to convert ppt to pdf', update.effective_user.id)
+    logger.info('User "%s" (%s) chose to convert ppt to pdf',
+                update.effective_user.id, update.effective_user.username)
     reply_keyboard = [[txt_dict['convert_text'][locale],
                       txt_dict['cancel_text'][locale]]]
     
@@ -205,7 +213,8 @@ def ppt2pdf(update,context, locale):
     context.user_data['function'] = 'ppt2pdf'
 
 def donate(update,context, locale):
-    logger.info('User "%s" opened donate page', update.effective_user.id)
+    logger.info('User "%s" (%s) opened donate page',
+                update.effective_user.id, update.effective_user.username)
     keyboard = [[
         InlineKeyboardButton(txt_dict['donate_url_text'][locale],
                              url = credentials.donateLink)
@@ -240,18 +249,18 @@ def file_handler(update, context):
         file_name = context.bot.get_file(file)['file_path'].split('/')[-1]
     file_name = unidecode(file_name)
     file_size = file['file_size']
-    logger.info('User "%s" uploaded a file %s with file size %d bytes',
-                update.effective_user.id, file_name, file_size)
+    logger.info('User "%s" (%s) uploaded a file %s with file size %d bytes',
+                update.effective_user.id, update.effective_user.username, file_name, file_size)
     if file_size >= 20971520:
         update.message.reply_text(errors_dict['big_file'][locale])
-        logger.error('User "%s" raised big file error',
-                     update.effective_user.id)
+        logger.error('User "%s" (%s) raised big file error',
+                     update.effective_user.id, update.effective_user.username)
         return None
     invalid_format, formats = check_invalid_format(file_name, context.user_data['function'])
     if invalid_format:
         update.message.reply_text(file_name + errors_dict['unsupported_format'][locale] + ', '.join(formats))
-        logger.error('User "%s" raised unsupported file format error',
-                     update.effective_user.id)
+        logger.error('User "%s" (%s) raised unsupported file format error',
+                     update.effective_user.id, update.effective_user.username)
         return None
     obj = context.bot.get_file(file)
     file_url = obj['file_path']
@@ -289,12 +298,13 @@ def control(update, context):
                 output_path = tools.compress(context.user_data['list_of_files'], 
                                          output_folder)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-                logger.info('User "%s" compressed file(s) successfully', update.effective_user.id)
+                logger.info('User "%s" (%s) compressed file(s) successfully',
+                            update.effective_user.id, update.effective_user.username)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
-                logger.error('User "%s" raised error %s while compressing',
-                             update.effective_user.id, e)
+                logger.error('User "%s" (%s) raised error %s while compressing',
+                             update.effective_user.id, update.effective_user.username, e)
                 idle(update, context, headless=True)
         else:
             update.message.reply_text(errors_dict['no_files'][locale])
@@ -308,12 +318,13 @@ def control(update, context):
                 output_path = tools.merge(context.user_data['list_of_files'], 
                                           output_folder)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-                logger.info('User "%s" merged files successfully', update.effective_user.id)
+                logger.info('User "%s" (%s) merged files successfully',
+                            update.effective_user.id, update.effective_user.username)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
-                logger.error('User "%s" raised error %s while merging',
-                             update.effective_user.id, e)
+                logger.error('User "%s" (%s) raised error %s while merging',
+                             update.effective_user.id, update.effective_user.username, e)
                 idle(update, context, headless=True)
         else:
             update.message.reply_text(errors_dict['no_files'][locale])
@@ -329,12 +340,13 @@ def control(update, context):
                                           output_folder,
                                           separate_pages = False)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-                logger.info('User "%s" splitted file successfully', update.effective_user.id)
+                logger.info('User "%s" (%s) splitted file successfully',
+                            update.effective_user.id, update.effective_user.username)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
-                logger.error('User "%s" raised error %s while splitting',
-                             update.effective_user.id, e)
+                logger.error('User "%s" (%s) raised error %s while splitting',
+                             update.effective_user.id, update.effective_user.username, e)
                 idle(update, context, headless=True)
         cleaner(output_folder, context)
     elif update.message.text in txt_dict['split_many_text'].values():
@@ -345,12 +357,13 @@ def control(update, context):
                                           output_folder,
                                           separate_pages = True)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-                logger.info('User "%s" splitted file successfully', update.effective_user.id)
+                logger.info('User "%s" (%s) splitted file successfully',
+                            update.effective_user.id, update.effective_user.username)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
-                logger.error('User "%s" raised error %s while splitting',
-                             update.effective_user.id, e)
+                logger.error('User "%s" (%s) raised error %s while splitting',
+                             update.effective_user.id, update.effective_user.username, e)
                 idle(update, context, headless=True)
         cleaner(output_folder, context)
     elif update.message.text in txt_dict['delete_pages_text'].values():
@@ -362,12 +375,13 @@ def control(update, context):
                                            context.user_data['split_range'],
                                            output_folder)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-                logger.info('User "%s" deleted pages from file successfully', update.effective_user.id)
+                logger.info('User "%s" (%s) deleted pages from file successfully',
+                            update.effective_user.id, update.effective_user.username)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
-                logger.error('User "%s" raised error %s while deleting',
-                             update.effective_user.id, e)
+                logger.error('User "%s" (%s) raised error %s while deleting',
+                             update.effective_user.id, update.effective_user.username, e)
                 idle(update, context, headless=True)
         cleaner(output_folder, context)
     elif update.message.text in txt_dict['ppt_to_pdf_text'].values():
@@ -389,12 +403,14 @@ def control(update, context):
                     output_path = tools.ppt2pdf(context.user_data['list_of_files'],
                                                output_folder)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
-                logger.info('User "%s" converted file(s) successfully', update.effective_user.id)
+                logger.info('User "%s" (%s) converted file(s) successfully',
+                            update.effective_user.id, update.effective_user.username)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
-                logger.error('User "%s" raised error %s while converting %s',
-                             update.effective_user.id, e, context.user_data['function'])
+                logger.error('User "%s" (%s) raised error %s while converting %s',
+                             update.effective_user.id, update.effective_user.username,
+                             e, context.user_data['function'])
                 idle(update, context, headless=True)
         else:
             update.message.reply_text(errors_dict['no_files'][locale])
@@ -412,19 +428,23 @@ def control(update, context):
             cleaner(output_folder, context)
     elif update.message.text in txt_dict['cancel_text'].values():
         cleaner(output_folder, context)
-        logger.info('User "%s" canceled operation', update.effective_user.id)
+        logger.info('User "%s" (%s) canceled operation',
+                    update.effective_user.id, update.effective_user.username)
         idle(update, context, headless=True)
     elif update.message.text in txt_dict['donate_text'].values():
         donate(update, context, locale)
         idle(update, context, headless=True)
     else:
-        logger.info('User "%s" entered unknown text: %s', update.effective_user.id, update.message.text)
+        logger.info('User "%s" (%s) entered unknown text: %s',
+                    update.effective_user.id, update.effective_user.username,
+                    update.message.text)
         update.message.reply_text(txt_dict['unknown_text'][locale])
             
 def help_command(update, context):
     """Send a message when the command /help is issued."""
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
-    logger.info('User "%s" asked for help', update.effective_user.id)
+    logger.info('User "%s" (%s) asked for help',
+                update.effective_user.id, update.effective_user.username)
     update.message.reply_text(txt_dict['help_text'][locale])
 
 def main():

@@ -49,7 +49,7 @@
     },
     "merge_input_text": {
         "en": "Upload or forward your file(s).\n\nPress \"Merge\" when all files will be added.\n\nEach file should not excess 20 mb (Telegram limits).",
-        "ru": "Загрузите или перешлите файл(ы).\n\nНажми \"Объединить\" когда все файлы будут загружены.\n\nРазмер каждого файла не должен превышать 20 мб (ограничения Телеграма)."
+        "ru": "Загрузите или перешлите файл(ы).\n\nНажмите \"Объединить\" когда все файлы будут загружены.\n\nРазмер каждого файла не должен превышать 20 мб (ограничения Телеграма)."
     },
     "split_input_text": {
         "en": "Upload or forward your file and write down in a separate message page numbers to extract from the file.\n\nP. S. Each file should not excess 20 mb (Telegram limits).",
@@ -77,7 +77,7 @@
     },
     "delete_call_text": {
         "en": "Press \"Delete pages\"",
-        "ru": "Нажми \"Удалить страницы\""
+        "ru": "Нажмите \"Удалить страницы\""
     },
     "convert_text": {
         "en": "Convert",

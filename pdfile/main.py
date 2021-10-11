@@ -244,10 +244,14 @@ def file_handler(update, context):
                 update.effective_user.id, file_name, file_size)
     if file_size >= 20971520:
         update.message.reply_text(errors_dict['big_file'][locale])
+        logger.error('User "%s" raised big file error',
+                     update.effective_user.id)
         return None
     invalid_format, formats = check_invalid_format(file_name, context.user_data['function'])
     if invalid_format:
         update.message.reply_text(errors_dict['unsupported_format'][locale] + ', '.join(formats))
+        logger.error('User "%s" raised unsupported file format error',
+                     update.effective_user.id)
         return None
     obj = context.bot.get_file(file)
     file_url = obj['file_path']
@@ -285,6 +289,7 @@ def control(update, context):
                 output_path = tools.compress(context.user_data['list_of_files'], 
                                          output_folder)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                logger.info('User "%s" compressed file(s) successfully', update.effective_user.id)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
@@ -303,6 +308,7 @@ def control(update, context):
                 output_path = tools.merge(context.user_data['list_of_files'], 
                                           output_folder)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                logger.info('User "%s" merged files successfully', update.effective_user.id)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
@@ -323,6 +329,7 @@ def control(update, context):
                                           output_folder,
                                           separate_pages = False)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                logger.info('User "%s" splitted file successfully', update.effective_user.id)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
@@ -338,6 +345,7 @@ def control(update, context):
                                           output_folder,
                                           separate_pages = True)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                logger.info('User "%s" splitted file successfully', update.effective_user.id)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
@@ -354,6 +362,7 @@ def control(update, context):
                                            context.user_data['split_range'],
                                            output_folder)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                logger.info('User "%s" deleted pages from file successfully', update.effective_user.id)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
@@ -380,6 +389,7 @@ def control(update, context):
                     output_path = tools.ppt2pdf(context.user_data['list_of_files'],
                                                output_folder)
                 update.message.bot.send_document(update.message.chat.id,open(output_path,'rb'))
+                logger.info('User "%s" converted file(s) successfully', update.effective_user.id)
                 idle(update, context, headless=False)
             except Exception as e:
                 update.message.reply_text(errors_dict['func_failed'][locale])
@@ -402,16 +412,19 @@ def control(update, context):
             cleaner(output_folder, context)
     elif update.message.text in txt_dict['cancel_text'].values():
         cleaner(output_folder, context)
+        logger.info('User "%s" canceled operation', update.effective_user.id)
         idle(update, context, headless=True)
     elif update.message.text in txt_dict['donate_text'].values():
         donate(update, context, locale)
         idle(update, context, headless=True)
     else:
+        logger.info('User "%s" entered unknown text: %s', update.effective_user.id, update.message.text)
         update.message.reply_text(txt_dict['unknown_text'][locale])
             
 def help_command(update, context):
     """Send a message when the command /help is issued."""
     locale = update.effective_user.language_code if update.effective_user.language_code in ['en', 'ru'] else 'en'
+    logger.info('User "%s" asked for help', update.effective_user.id)
     update.message.reply_text(txt_dict['help_text'][locale])
 
 def main():

@@ -12,8 +12,12 @@
         "ru": " имеет недопустимый формат файла. Файл не будет загружен. Файл должен иметь один из следующих форматов: "
     },
     "unsupported_pattern": {
-        "en": " is unsupported pattern.",
-        "ru": " - недопустимый формат ввода."
+        "en": "Your pattern is incorrect.\nPlease, try again.",
+        "ru": "Выбран некорректный интервал.\nПожалуйста, попробуйте снова."
+    },
+    "unsupported_range_exceed": {
+        "en": "Your range exceeds number of pages.\nThe range will be truncated.\n\n",
+        "ru": "Выбранный интервал превышает количество страниц в файле.\nИнтервал будет сокращен.\n\n"
     },
     "one_file": {
         "en": "Only one file was loaded. Please, add more files and try again.",

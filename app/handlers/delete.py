@@ -9,7 +9,7 @@ from unidecode import unidecode
 
 from app.handlers.common import cmd_idle
 from app.tools import tools
-from app.tools.tools import check_invalid_format
+from app.tools.tools import check_invalid_format, count_pages, create_range
 import logging
 
 from app.modules.read_messages import txt_dict, errors_dict
@@ -88,10 +88,12 @@ async def handle_single_file(message: types.Message, state: FSMContext):
     file_path = os.path.join(output_folder, file_name)
 
     await file.download(destination_file=file_path)
-
     await state.update_data(file_path=file_path)
 
-    await message.answer(txt_dict['delete_queue_text'][locale].format(os.path.basename(file_path)))
+    pages = count_pages(file_path)
+    await state.update_data(pages=pages)
+
+    await message.answer(txt_dict['delete_queue_text'][locale].format(os.path.basename(file_path), pages))
     await message.answer(txt_dict['available_range_text'][locale],
                          parse_mode='MarkdownV2')
 
@@ -101,14 +103,38 @@ async def handle_single_file(message: types.Message, state: FSMContext):
 async def delete_pages(message: types.Message, state: FSMContext):
     user_data = await state.get_data()
     locale = user_data['locale']
+    pages = user_data['pages']
 
     if re.match('^\s*\d+[-\d+]*\s*(,\s*\d+[-\d+]*\s*)*\s*$', message.text):
-        delete_range = message.text
-        pass
+        delete_range_string = message.text
+        custom_range = create_range(message.text, pages)
+        if any((i > pages for i in custom_range) or any(i <= 0 for i in custom_range)):
+            logger.error('User "%s" (%s) defined unavailable range. Range: %s, number of pages: %s',
+                         message.from_user.id, message.from_user.username, custom_range, pages)
+            custom_range = [i for i in custom_range if (i <= pages) and (i > 0)]
+            if len(custom_range) < 1:
+                logger.error('User "%s" (%s) has range with zero length. Range: %s, number of pages: %s',
+                             message.from_user.id, message.from_user.username, message.text, pages)
+                await message.answer(errors_dict['unsupported_pattern'][locale])
+                await message.answer(txt_dict['available_range_text'][locale],
+                                     parse_mode='MarkdownV2')
+                return None
+            else:
+                await message.answer(errors_dict['unsupported_range_exceed'][locale])
+                delete_range = custom_range
+        else:
+            if len(custom_range) < 1:
+                logger.error('User "%s" (%s) has range with zero length. Range: %s, number of pages: %s',
+                             message.from_user.id, message.from_user.username, message.text, pages)
+                await message.answer(errors_dict['unsupported_pattern'][locale])
+                await message.answer(txt_dict['available_range_text'][locale],
+                                     parse_mode='MarkdownV2')
+            delete_range = custom_range
+
     else:
         logger.error('User "%s" (%s) raised unavailable pattern error. Message: %s',
                      message.from_user.id, message.from_user.username, message.text)
-        await message.answer(message.text + errors_dict['unsupported_pattern'][locale])
+        await message.answer(errors_dict['unsupported_pattern'][locale])
         await message.answer(txt_dict['available_range_text'][locale],
                              parse_mode='MarkdownV2')
         return None
@@ -117,7 +143,7 @@ async def delete_pages(message: types.Message, state: FSMContext):
     output_folder: str = os.path.join('temp', str(message.from_user.id))
 
     try:
-        output_path = tools.delete(file, delete_range, output_folder)
+        output_path = tools.delete(file, delete_range_string, delete_range, output_folder)
         await types.ChatActions.upload_document()
         await message.answer_document(open(output_path, 'rb'))
         logger.info('User "%s" (%s) deleted pages from file successfully',

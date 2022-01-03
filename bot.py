@@ -23,8 +23,8 @@ async def main():
     os.makedirs('../logs', exist_ok=True)
     logfile = '../logs/{}.log'.format(datetime.now().strftime("%Y-%m-%dT%H"))
     logging.basicConfig(
-        # stream=sys.stdout,
-        filename=logfile,
+        stream=sys.stdout,
+        # filename=logfile,
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
     )
@@ -36,7 +36,6 @@ async def main():
     config = load_config(os.path.join('config', 'bot.ini'))
     # ininitalizing bot
     bot = Bot(token=config.tg_bot.token)
-    # await bot.send_message(758696505, "test message")
     dp = Dispatcher(bot, storage=MemoryStorage())
 
     # registering handlers

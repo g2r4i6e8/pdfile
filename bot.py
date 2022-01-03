@@ -23,8 +23,8 @@ async def main():
     os.makedirs('../logs', exist_ok=True)
     logfile = '../logs/{}.log'.format(datetime.now().strftime("%Y-%m-%dT%H"))
     logging.basicConfig(
-        stream=sys.stdout,
-        # filename=logfile,
+        # stream=sys.stdout,
+        filename=logfile,
         level=logging.INFO,
         format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
     )

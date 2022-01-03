@@ -45,7 +45,7 @@
     },
     "compress_queue_text": {
         "en": "Added files:\n{}\n\nPress \"Compress\" when all files will be added.",
-        "ru": "Загруженные файлы:\n{}\n\nНажмите \"Сжать\" когда все файлы будут загружены."
+        "ru": "Загруженные файлы:\n{}\n\nНажмите \"Сжать\", когда все файлы будут загружены."
     },
     "merge_text": {
         "en": "Merge",
@@ -57,7 +57,7 @@
     },
     "merge_queue_text": {
         "en": "Added files:\n{}\n\nPress \"Merge\" when all files will be added.",
-        "ru": "Загруженные файлы:\n{}\n\nНажмите \"Объединить\" когда все файлы будут загружены."
+        "ru": "Загруженные файлы:\n{}\n\nНажмите \"Объединить\", когда все файлы будут загружены."
     },
     "split_input_text": {
         "en": "Upload or forward your file to extract pages.",
@@ -105,7 +105,7 @@
     },
     "convert_queue_text": {
         "en": "Added files:\n{}\n\nPress \"Convert\" when all files will be added.",
-        "ru": "Загруженные файлы:\n{}\n\nНажмите \"Конвертировать\" когда все файлы будут загружены."
+        "ru": "Загруженные файлы:\n{}\n\nНажмите \"Конвертировать\", когда все файлы будут загружены."
     },
     "available_range_text": {
         "en": "Available patterns:\n\n*1,3,6*\npages 1,3,6\n\n*1\\-6, 8*\npages from 1 to 6 and 8\n\n*4\\-7,2,9*\npages from 4 to 7 and 2 and 9 \\(non\\-consecutive choice\\)\n\n*6\\-*\npages from 6 to end\n\n*4,7\\-9,11\\-*\npages 4, from 7 to 9 and from 11 to end\n\n",

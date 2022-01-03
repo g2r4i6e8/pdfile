@@ -4,28 +4,28 @@
         "ru": "Ошибка при загрузке файла. \\nПожалуйста, попробуйте снова. Если возникли вопросы, напишите @akolomatskiy."
     },
     "big_file": {
-        "en": "File is too big. It will not be processed. Maximum file size is 20 mb (Telegram limits).",
-        "ru": "Файл слишком большой. Допустимый размер загружаемых файлов - до 20 мб (ограничения Телеграма)."
+        "en": "File is too big. It will not be processed. Maximum file size is 20 mb.",
+        "ru": "Файл слишком большой. Допустимый размер загружаемых файлов - до 20 мб."
     },
     "unsupported_format": {
-        "en": " has unsupported file format. It will not be processed. Supported format(s): ",
-        "ru": " имеет недопустимый формат файла. Файл не будет загружен. Файл должен иметь один из следующих форматов: "
+        "en": " has unsupported file format. Supported format(s) for this function: ",
+        "ru": " имеет недопустимый формат файла. Для работы этой функции файл должен иметь один из следующих форматов: "
     },
     "unsupported_pattern": {
         "en": "Your pattern is incorrect.\nPlease, try again.",
         "ru": "Выбран некорректный интервал.\nПожалуйста, попробуйте снова."
     },
     "unsupported_range_exceed": {
-        "en": "Your range exceeds number of pages.\nThe range will be truncated.\n\n",
-        "ru": "Выбранный интервал превышает количество страниц в файле.\nИнтервал будет сокращен.\n\n"
+        "en": "Your range exceeds number of pages.\nThe range will be truncated.",
+        "ru": "Выбранный интервал превышает количество страниц в файле.\nИнтервал будет сокращен."
     },
     "one_file": {
-        "en": "Only one file was loaded. Please, add more files and try again.",
-        "ru": "Загружен только один файл. Пожалуйста, загрузите больше файлов и попробуйте снова."
+        "en": "Only one file was loaded. This function requires at least two files.",
+        "ru": "Загружен только один файл. Для работы этой функции нужно больше двух файлов."
     },
     "no_files": {
-        "en": "No files were loaded. Process failed. Please, try again.",
-        "ru": "Не загружен ни один файл. Невозможно выполнить операцию. Пожалуйста, попробуйте снова."
+        "en": "No files were loaded. This function requires at least two files.",
+        "ru": "Не загружен ни один файл. Для работы этой функции нужно больше двух файлов."
     },
     "func_failed": {
         "en": "Oops, something went wrong while processing your file(s). Please, try again later.",

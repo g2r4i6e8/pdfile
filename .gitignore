@@ -1,7 +1,5 @@
 .idea
-__pycache__
-pdfile/__pycache__
-tests/__pycache__
-pdfile/temp
-pdfile/credentials.py
+temp/
 logs/
+config/
+

@@ -20,8 +20,8 @@ from app.handlers.split import register_handlers_split
 async def main():
     # setting up logging
     os.chdir(os.path.dirname(os.path.realpath(__file__)))
-    os.makedirs('../logs', exist_ok=True)
-    logfile = '../logs/{}.log'.format(datetime.now().strftime("%Y-%m-%dT%H"))
+    os.makedirs('logs', exist_ok=True)
+    logfile = 'logs/{}.log'.format(datetime.now().strftime("%Y-%m-%dT%H"))
     logging.basicConfig(
         # stream=sys.stdout,
         filename=logfile,

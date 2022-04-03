@@ -26,7 +26,7 @@ class UserControlSplit(StatesGroup):
 
 
 async def split_activate(message: types.Message, state: FSMContext):
-    locale = message.from_user.locale if message.from_user.locale in ['en', 'ru'] else 'en'
+    locale = str(message.from_user.locale) if str(message.from_user.locale) in ['en', 'ru'] else 'en'
     logger.info('User "%s" (%s) chose to split PDF',
                 message.from_user.id, message.from_user.username)
     await state.update_data(locale=locale)

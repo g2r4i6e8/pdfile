@@ -23,7 +23,7 @@ class UserControlDelete(StatesGroup):
 
 
 async def delete_activate(message: types.Message, state: FSMContext):
-    locale = message.from_user.locale if message.from_user.locale in ['en', 'ru'] else 'en'
+    locale = str(message.from_user.locale) if str(message.from_user.locale) in ['en', 'ru'] else 'en'
     logger.info('User "%s" (%s) chose to delete pages from PDF',
                 message.from_user.id, message.from_user.username)
     await state.update_data(locale=locale)

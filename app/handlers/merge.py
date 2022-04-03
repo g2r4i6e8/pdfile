@@ -25,7 +25,7 @@ async def merge_activate(message: types.Message, state: FSMContext):
     global added_files, lst
     added_files = 0
     lst = []
-    locale = message.from_user.locale if message.from_user.locale in ['en', 'ru'] else 'en'
+    locale = str(message.from_user.locale) if str(message.from_user.locale) in ['en', 'ru'] else 'en'
     logger.info('User "%s" (%s) chose to merge PDF',
                 message.from_user.id, message.from_user.username)
     await state.update_data(locale=locale)

@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 async def cmd_start(message: types.Message, state: FSMContext):
     await state.finish()
     await cleaner(os.path.join('temp', str(message.from_user.id)))
-    locale = message.from_user.locale if message.from_user.locale in ['en', 'ru'] else 'en'
+    locale = str(message.from_user.locale) if str(message.from_user.locale) in ['en', 'ru'] else 'en'
     await state.update_data(locale=locale)
     logger.info('User "%s" (%s) with language code "%s" started the bot instance',
                 message.from_user.id, message.from_user.username, locale)
@@ -41,7 +41,7 @@ async def cmd_start(message: types.Message, state: FSMContext):
 async def cmd_idle(message: types.Message, state: FSMContext, headless=True):
     await state.finish()
     await cleaner(os.path.join('temp', str(message.from_user.id)))
-    locale = message.from_user.locale if message.from_user.locale in ['en', 'ru'] else 'en'
+    locale = str(message.from_user.locale) if str(message.from_user.locale) in ['en', 'ru'] else 'en'
     logger.info('User "%s" (%s) is idle',
                 message.from_user.id, message.from_user.username)
 
@@ -71,7 +71,7 @@ async def cmd_idle(message: types.Message, state: FSMContext, headless=True):
 
 async def cmd_donate(message: types.Message, state: FSMContext):
     await state.finish()
-    locale = message.from_user.locale if message.from_user.locale in ['en', 'ru'] else 'en'
+    locale = str(message.from_user.locale) if str(message.from_user.locale) in ['en', 'ru'] else 'en'
     logger.info('User "%s" (%s) opened donate page',
                 message.from_user.id, message.from_user.username)
 
@@ -90,7 +90,7 @@ async def cmd_donate(message: types.Message, state: FSMContext):
 
 async def cmd_help(message: types.Message, state: FSMContext):
     await state.finish()
-    locale = message.from_user.locale if message.from_user.locale in ['en', 'ru'] else 'en'
+    locale = str(message.from_user.locale) if str(message.from_user.locale) in ['en', 'ru'] else 'en'
     logger.info('User "%s" (%s) entered unknown text: %s',
                 message.from_user.id, message.from_user.username, message.text)
 

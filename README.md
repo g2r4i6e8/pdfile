@@ -18,6 +18,9 @@
 
 - **Word to PDF**: Convert Word documents (doc, docx) to PDF files (up to 100 documents simultaneously!)
 
+## PDFile in action (demo)
+<img src="https://github.com/g2r4i6e8/pdfile/blob/main/docs/bot_example.gif?raw=true" width="600" />
+
 ## Dependencies
 - Ghostscript
 - Libreoffice
